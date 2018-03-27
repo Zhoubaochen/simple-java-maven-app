@@ -5,19 +5,28 @@ pipeline {
       parallel {
         stage('Build') {
           steps {
-            sleep 4
+            echo 'call mvn package'
           }
         }
-        stage('error') {
+        stage('') {
           steps {
-            echo 'eaysway'
+            bat(script: 'mvn package', returnStatus: true, returnStdout: true)
           }
         }
       }
     }
     stage('Test') {
-      steps {
-        echo 'test to deliver'
+      parallel {
+        stage('Test') {
+          steps {
+            echo 'call mvn test'
+          }
+        }
+        stage('') {
+          steps {
+            bat(script: 'mvn test', returnStatus: true, returnStdout: true)
+          }
+        }
       }
     }
     stage('Deploy') {
