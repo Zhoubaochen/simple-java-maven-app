@@ -2,31 +2,14 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            echo 'call mvn package'
-          }
-        }
-        stage('') {
-          steps {
-            bat(script: 'mvn package', returnStatus: true, returnStdout: true)
-          }
-        }
+      steps {
+        echo 'call mvn package'
+        bat 'mvn clean'
       }
     }
     stage('Test') {
-      parallel {
-        stage('Test') {
-          steps {
-            echo 'call mvn test'
-          }
-        }
-        stage('') {
-          steps {
-            bat(script: 'mvn test', returnStatus: true, returnStdout: true)
-          }
-        }
+      steps {
+        echo 'call mvn test'
       }
     }
     stage('Deploy') {
