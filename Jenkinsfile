@@ -5,10 +5,10 @@ pipeline {
       parallel {
         stage('Build') {
           steps {
-            sh 'echo "how to build"'
+            sleep 4
           }
         }
-        stage('') {
+        stage('error') {
           steps {
             echo 'eaysway'
           }
